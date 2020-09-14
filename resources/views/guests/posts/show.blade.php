@@ -12,8 +12,8 @@
             <h4 class="media-heading">{{ $post->title }}</h4>
             <p>Creato il: {{ $post->created_at->format('d/m/y') }}</p>
             <p>{{ $post->content }}</p>
-            <a class="btn btn-primary" href="{{ route('admin.posts.index')}}"> Torna alla lista post</a>
-            
+            <a class="btn btn-primary" href="{{ route('posts.index')}}"> Torna alla lista post</a>
+
 
           </div>
 
