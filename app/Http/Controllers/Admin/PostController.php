@@ -30,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -41,7 +41,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requested_data = $request->all();
+        //dd($requested_data);
+        $path = $request->file('image')->store('images', 'public');
+        $new_post = new Post();
+        $new_post->user_id = Auth::id();
+        $new_post->title = $requested_data['title'];
+        $new_post->content = $requested_data['content'];
+
+        //$post->image = $path;
+
+        if (isset($requested_data['image'])) {
+        $path = $request->file('image')->store('images', 'public');
+        $new_post->image = $path;
+        }
+
+        $new_post->save();
+
+        return redirect()->route('posts.show', $new_post);
+
     }
 
     /**
@@ -51,8 +69,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
+
     {
-      return view('admin.posts.show', compact('post'));
+      $user = Auth::user();
+      return view('admin.posts.show', compact('post', 'user'));
 
     }
 
@@ -64,8 +84,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $users = User::all();
-        return view('admin.posts.edit', compact('post', 'users'));
+        $user = Auth::user();
+        return view('admin.posts.edit', compact('post', 'user'));
     }
 
     /**
@@ -79,9 +99,33 @@ class PostController extends Controller
     {
       $request->validate($this->validationData());
 
+      if (!Auth::check()) {
+        abort('404');
+      }
+
+
+
       $requested_data = $request->all();
-      $post->update($requested_data);
-      return redirect()->route('admin.posts.show', $post);
+      $post->title = $requested_data['title'];
+      $post->content = $requested_data['content'];
+      $post->user_id = Auth::id();
+      // $path = $request->file('image')->store('images', 'public');
+      // $post->image = $path;
+
+      if (isset($requested_data['image'])) {
+        $path = $request->file('image')->store('images', 'public');
+        $post->image = $path;
+
+      } else {
+        $post->image = '';
+      }
+
+      $post->update();
+
+      $post->save();
+
+
+      return redirect()->route('posts.show', $post);
 
     }
 
@@ -99,10 +143,8 @@ class PostController extends Controller
     public function validationData() {
       return [
         'title' => 'required|max:255',
-
+        'content' => 'required|max:600',
         
-
-        'user_id' => 'required|integer',
       ];
     }
 }

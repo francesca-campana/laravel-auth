@@ -5,9 +5,11 @@
     <div class="row">
       <div class="col-12">
         <div class="media">
-          <div class="media-left media-middle">
-            <img class="media-object" src="{{$post->image}}" alt="{{ $post->title }}">
-          </div>
+          @if (!empty($post->image))
+            <div class="media-left media-middle">
+              <img class="media-object" src="{{asset('storage') . '/' . $post->image}}" alt="{{ $post->title }}">
+            </div>
+          @endif
           <div class="media-body">
             <h4 class="media-heading">{{ $post->title }}</h4>
             <p>Creato il: {{ $post->created_at->format('d/m/y') }}</p>
