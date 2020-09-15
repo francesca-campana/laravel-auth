@@ -33,7 +33,7 @@
         </div>
 
         <div>
-          <label>Post Image:</label><br>
+          <label>Post Image: </label><br>
           <input type="file" name="image" accept="image/*">
         </div>
 

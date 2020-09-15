@@ -144,7 +144,7 @@ class PostController extends Controller
       return [
         'title' => 'required|max:255',
         'content' => 'required|max:600',
-        
+        'image' => 'image',
       ];
     }
 }

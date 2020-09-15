@@ -8,10 +8,13 @@
 
             @if (!empty($post->image))
               <div class="media-left media-middle">
+              @if (File::exists('storage'.'/'. $post->image))
                 <img class="media-object" src="{{asset('storage') . '/' . $post->image}}" alt="{{ $post->title }}">
+                  @else
+                    <img class="media-object" src="{{$post->image}}" alt="{{ $post->title }}">
+                  @endif
               </div>
             @endif
-
 
           <div class="media-body">
             <h4 class="media-heading">{{ $post->title }}</h4>

@@ -17,7 +17,7 @@
         </div>
       @endif
 
-      {{-- Add new post form --}}
+      {{-- Modify post form --}}
       <form action="{{route('admin.posts.update', $post)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -33,7 +33,7 @@
         </div>
         <div>
           <div>
-            <label>Post Image:</label><br>
+            <label>Post Image: </label><br>
             <input type="file" name="image" accept="image/*">
           </div>
 
