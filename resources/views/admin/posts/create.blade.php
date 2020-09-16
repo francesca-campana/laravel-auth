@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-12">
         <h2>Crea il tuo post</h2>
-      </div>
+
       {{-- Validazione form --}}
       @if ($errors->any())
         <div class="alert alert-danger">
@@ -32,16 +32,17 @@
           <textarea class="form-control" name="content" rows="3">{{ old('content')}}</textarea>
         </div>
 
-        <div>
-          <label>Post Image: </label><br>
+        <div class="mt-2">
+          <label>Post Image: </label>
           <input type="file" name="image" accept="image/*">
         </div>
 
-        <div>
-          <input type="submit" name="" value="save">
+        <div class="mt-2">
+          <input class="btn btn-primary" type="submit" name="" value="save">
         </div>
 
         </form>
-
       </div>
+    </div>
+  </div>
     @endsection
