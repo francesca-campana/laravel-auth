@@ -11,12 +11,13 @@
               <div class="card-body d-flex justify-content-xl-between">
                 <h5 class="card-title">{{ $post->title }}</h5>
 
-                <a class="btn btn-success btn-xs" href="{{ route('posts.show', $post) }}">Show</a>
+                <a class="btn btn-primary btn-xs" href="{{ route('posts.show', $post) }}">Show</a>
 
               </div>
 
           </div>
           @endforeach
+          {{ $posts->links() }}
         </div>
       </div>
     </div>
