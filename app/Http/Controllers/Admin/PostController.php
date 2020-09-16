@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\SendNewMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class PostController extends Controller
@@ -61,6 +63,8 @@ class PostController extends Controller
         }
 
         $new_post->save();
+        //dd($new_post->user->email);
+        Mail::to($new_post->user->email)->send(new SendNewMail);
 
         return redirect()->route('posts.show', $new_post);
 
