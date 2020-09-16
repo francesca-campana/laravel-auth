@@ -8,19 +8,12 @@
 
           @foreach ($posts as $post)
             <div class="card mb-3" style="max-width: 1170px;">
-              <div class="row no-gutters">
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ $post->title }}</h5>
+              <div class="card-body d-flex justify-content-xl-between">
+                <h5 class="card-title">{{ $post->title }}</h5>
 
-                    <a class="btn btn-success btn-xs" href="{{ route('posts.show', $post) }}">Show</a>
+                <a class="btn btn-success btn-xs" href="{{ route('posts.show', $post) }}">Show</a>
 
-                  </div>
-
-                </div>
-
-
-            </div>
+              </div>
 
           </div>
           @endforeach

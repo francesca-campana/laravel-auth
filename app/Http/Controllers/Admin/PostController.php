@@ -41,9 +41,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->validationData());
+        if (!Auth::check()) {
+          abort('404');
+        }
         $requested_data = $request->all();
         //dd($requested_data);
-        $path = $request->file('image')->store('images', 'public');
+
         $new_post = new Post();
         $new_post->user_id = Auth::id();
         $new_post->title = $requested_data['title'];
@@ -135,9 +139,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+      $post->delete();
+      return redirect()->route('admin.posts.index');
     }
 
     public function validationData() {
